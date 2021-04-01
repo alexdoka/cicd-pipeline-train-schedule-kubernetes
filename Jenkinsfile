@@ -13,40 +13,40 @@ pipeline {
             }
         }
 
-        stage(MY_BUILD){
-            agent {
-                docker "docker"
-            }
-            stages{
-                stage('Build Docker Image') {
-                    when {
-                        branch 'master'
-                   }
-                    steps {
-                        sh 'echo =============start build==============' 
-                        script {
-                            app = docker.build(DOCKER_IMAGE_NAME)
-                            app.inside {
-                                sh 'echo Hello, World!'
-                           }
-                       }
-                   }
-               }
-            }
-        }
-        // stage('Build Docker Image') {
-        //     when {
-        //         branch 'master'
+        // stage(MY_BUILD){
+        //     agent {
+        //         docker "docker"
         //     }
-        //     steps {
-        //         script {
-        //             app = docker.build(DOCKER_IMAGE_NAME)
-        //             // app.inside {
-        //             //     sh 'echo Hello, World!'
-        //             // }
-        //         }
+        //     stages{
+        //         stage('Build Docker Image') {
+        //             when {
+        //                 branch 'master'
+        //            }
+        //             steps {
+        //                 sh 'echo =============start build==============' 
+        //                 script {
+        //                     app = docker.build(DOCKER_IMAGE_NAME)
+        //                     app.inside {
+        //                         sh 'echo Hello, World!'
+        //                    }
+        //                }
+        //            }
+        //        }
         //     }
         // }
+        stage('Build Docker Image') {
+            when {
+                branch 'master'
+            }
+            steps {
+                script {
+                    app = docker.build(DOCKER_IMAGE_NAME)
+                    // app.inside {
+                    //     sh 'echo Hello, World!'
+                    // }
+                }
+            }
+        }
         // stage('Push Docker Image') {
         //     when {
         //         branch 'master'
