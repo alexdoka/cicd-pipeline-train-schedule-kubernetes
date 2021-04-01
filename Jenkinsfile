@@ -15,7 +15,7 @@ pipeline {
 
         stage(MY_BUILD){
             agent {
-                docker "docker:latest"
+                docker "docker"
             }
             stages{
                 stage('Build Docker Image') {
