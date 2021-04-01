@@ -23,7 +23,8 @@ pipeline {
                         branch 'master'
                    }
                     steps {
-                       script {
+                        sh 'echo =============start build==============' 
+                        script {
                             app = docker.build(DOCKER_IMAGE_NAME)
                             app.inside {
                                 sh 'echo Hello, World!'
